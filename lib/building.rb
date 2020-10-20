@@ -44,18 +44,14 @@ class Building
   end
 
   def annual_breakdown
-    breakdown = {}
-    rented_units.each do |unit|
-      breakdown[unit.renter.name] = (unit.monthly_rent * 12)
+    rented_units.each_with_object({}) do |unit, hash_obj|
+      hash_obj[unit.renter.name] = (unit.monthly_rent * 12)
     end
-    breakdown
   end
 
   def rooms_by_renter
-    rooms = {}
-    rented_units.each do |unit|
-      rooms[unit.renter] = {bathrooms: unit.bathrooms, bedrooms: unit.bedrooms}
+    rented_units.each_with_object({}) do |unit, hash_obj|
+      hash_obj[unit.renter] = {bathrooms: unit.bathrooms, bedrooms: unit.bedrooms}
     end
-    rooms
   end
 end
