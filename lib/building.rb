@@ -35,4 +35,12 @@ class Building
     end
     highest.renter
   end
+
+  def units_by_number_of_bedrooms
+    bedrooms = Hash.new {|h,k| h[k] = []}
+    @units.each do |unit|
+      bedrooms[unit.bedrooms] << unit.number
+    end
+    bedrooms
+  end
 end

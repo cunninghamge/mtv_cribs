@@ -75,7 +75,6 @@ class BuildingTest < Minitest::Test
   end
 
   def test_units_by_number_of_bedrooms
-    skip
     @building.add_unit(@unit1)
     @building.add_unit(@unit2)
     @building.add_unit(@unit3)
