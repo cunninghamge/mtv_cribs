@@ -58,6 +58,7 @@ class BuildingTest < Minitest::Test
   end
 
   def test_renter_with_highest_rent
+    skip
     @building.add_unit(@unit1)
     @building.add_unit(@unit2)
     @building.add_unit(@unit3)
@@ -75,6 +76,7 @@ class BuildingTest < Minitest::Test
   end
 
   def test_units_by_number_of_bedrooms
+    skip
     @building.add_unit(@unit1)
     @building.add_unit(@unit2)
     @building.add_unit(@unit3)
@@ -87,5 +89,4 @@ class BuildingTest < Minitest::Test
                 }
     assert_equal expected, @building.units_by_number_of_bedrooms
   end
-
 end
