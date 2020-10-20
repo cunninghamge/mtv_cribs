@@ -36,7 +36,6 @@ class BuildingTest < Minitest::Test
   end
 
   def test_average_rent
-    skip
     @building.add_unit(@unit1)
     @building.add_unit(@unit2)
 
