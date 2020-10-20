@@ -8,7 +8,7 @@ class BuildingTest < Minitest::Test
   def setup
     @building = Building.new
     @unit1 = Apartment.new({number: "A1", monthly_rent: 1200, bathrooms: 1, bedrooms: 1})
-    @unit2 = Apartment.new({number: "B2", monthly_rent: 999, bathrooms: 1, bedrooms: 2})
+    @unit2 = Apartment.new({number: "B2", monthly_rent: 999, bathrooms: 2, bedrooms: 2})
     @unit3 = Apartment.new({number: "C3", monthly_rent: 1150, bathrooms: 2, bedrooms: 2})
     @unit4 = Apartment.new({number: "D4", monthly_rent: 1500, bathrooms: 2, bedrooms: 3})
     @renter1 = Renter.new("Spencer")
@@ -86,5 +86,30 @@ class BuildingTest < Minitest::Test
                   1=> ["A1"]
                 }
     assert_equal expected, @building.units_by_number_of_bedrooms
+  end
+
+  def test_annual_breakdown
+    @building.add_unit(@unit1)
+    @building.add_unit(@unit2)
+    @building.add_unit(@unit3)
+    @unit2.add_renter(@renter1)
+
+    assert_equal {"Spencer"=> 11988}, @building.annual_breakdown
+
+    @unit1.add_renter(@renter2)
+
+    assert_equal {"Jessie"=> 14400, "Spencer"=> 11988}, @building.annual_breakdown
+  end
+
+  def test_rooms_by_renter
+    @building.add_unit(@unit1)
+    @building.add_unit(@unit2)
+    @building.add_unit(@unit3)
+    @unit2.add_renter(@renter1)
+    @unit1.add_renter(@renter2)
+
+    expected = {@renter1=> {bathrooms: 1, bedrooms: 1},
+                @renter2=> {bathrooms: 2, bedrooms: 2}}
+    assert_equal expected, @building.rooms_by_renter
   end
 end
