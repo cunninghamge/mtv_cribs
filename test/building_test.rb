@@ -27,7 +27,6 @@ class BuildingTest < Minitest::Test
   end
 
   def test_renters
-    skip
     @building.add_unit(@unit1)
     @building.add_unit(@unit2)
     @unit1.add_renter(@renter1)
