@@ -1,9 +1,8 @@
 class Building
-  attr_reader :units, :renters
+  attr_reader :units
 
   def initialize
     @units = []
-    @renters = []
   end
 
   def add_unit(unit)
@@ -11,7 +10,7 @@ class Building
   end
 
   def renters
-    @renters = @units.map do |unit|
+    rented_units.map do |unit|
       unit.renter.name
     end
   end
@@ -43,4 +42,13 @@ class Building
     end
     bedrooms
   end
+
+  def annual_breakdown
+    breakdown = {}
+    rented_units.each do |unit|
+      breakdown[unit.renter.name] = (unit.monthly_rent * 12)
+    end
+    breakdown
+  end
+
 end
