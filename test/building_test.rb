@@ -104,15 +104,14 @@ class BuildingTest < Minitest::Test
   end
 
   def test_rooms_by_renter
-    skip
     @building.add_unit(@unit1)
     @building.add_unit(@unit2)
     @building.add_unit(@unit3)
     @unit2.add_renter(@renter1)
     @unit1.add_renter(@renter2)
 
-    expected = {@renter1=> {bathrooms: 1, bedrooms: 1},
-                @renter2=> {bathrooms: 2, bedrooms: 2}}
+    expected = {@renter2=> {bathrooms: 1, bedrooms: 1},
+                @renter1=> {bathrooms: 2, bedrooms: 2}}
     assert_equal expected, @building.rooms_by_renter
   end
 end
